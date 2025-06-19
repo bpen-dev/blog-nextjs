@@ -45,7 +45,8 @@
 }
 
 .thumbnail {
-  width: 960px;
+  max-width: 960px;
+  width: 100%;
   height: auto;
   margin-bottom: 64px;
 }
