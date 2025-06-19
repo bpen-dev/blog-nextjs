@@ -1,6 +1,7 @@
 import { getTagList } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Header from '@/components/Header';
+import Sidebar from '@/components/Sidebar';
 import Footer from '@/components/Footer';
 import Nav from '@/components/Nav';
 import './globals.css';
@@ -31,17 +32,28 @@ type Props = {
 };
 
 export default async function RootLayout({ children }: Props) {
-  const tags = await getTagList({
-    limit: LIMIT,
-  });
+  const tags = await getTagList({ limit: LIMIT });
+
   return (
     <html lang="ja">
       <body>
         <Header />
         <Nav tags={tags.contents} />
-        <main className={styles.main}>{children}</main>
+
+        {/* ２カラム区域 */}
+        <div className={styles.container}>
+          {/* メインカラム */}
+          <main className={styles.main}>{children}</main>
+
+          {/* サイドバー ― ラッパーに .sidebar クラスを必ず付与 */}
+          <aside className={styles.sidebar}>
+            <Sidebar />
+          </aside>
+        </div>
+
         <Footer />
       </body>
     </html>
   );
 }
+

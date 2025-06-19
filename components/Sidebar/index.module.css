@@ -1,0 +1,171 @@
+/* components/Sidebar.module.css */
+
+.sidebarInner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.widget {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.title {
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* 検索フォーム */
+.searchForm {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fafafa;
+}
+.searchForm input {
+  flex: 1;
+  border: none;
+  padding: 0.75rem;
+  font-size: 0.95rem;
+}
+.searchForm button {
+  border: none;
+  background: none;
+  color: #888;
+  padding: 0 0.75rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+/* 新着記事 */
+.postList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.postList li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+.postList li:last-child {
+  margin-bottom: 0;
+}
+.postList img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+.postList span {
+  font-size: 0.95rem;
+  color: #333;
+  line-height: 1.3;
+}
+
+/* アーカイブ・カテゴリ */
+.archiveList,
+.categoryList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.archiveList li,
+.categoryList li {
+  font-size: 0.95rem;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0.5rem 0;
+}
+.archiveList li:last-child,
+.categoryList li:last-child {
+  border-bottom: none;
+}
+
+.categoryList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.categoryList .count {
+  background: #eee;
+  border-radius: 9999px;
+  padding: 0 0.5rem;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+/* プロフィールカード */
+.profileCard {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+.avatarWrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 0.75rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f0f8ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.profileLink {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #007acc;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+.profileDesc {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+.qualifications {
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  font-size: 0.85rem;
+  color: #666;
+  text-align: left;
+}
+.qualifications li + li {
+  margin-top: 0.25rem;
+}
+
+.iconList {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.iconList button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #888;
+}
+.iconList button:hover {
+  color: #444;
+}
