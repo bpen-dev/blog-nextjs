@@ -7,19 +7,20 @@
 }
 
 .widget {
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1rem;
+  background: #ffffff; /* ウィジェットの背景を白に */
+  border: 1px solid #E2E8F0; /* 境界線を少し薄く */
+  border-radius: 12px; /* 角を大きく丸める */
+  padding: 1.5rem; /* 内側の余白を広げる */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* 浮かび上がる影を追加 */
 }
 
 .title {
-  margin-bottom: 0.75rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #333;
-  border-bottom: none;
-  padding-bottom: 0;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #4A5568; /* タイトルの色を少し落ち着かせる */
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #CBD5E0; /* アクセントの下線 */
 }
 
 /* 検索フォーム */
@@ -113,9 +114,8 @@
 
 /* プロフィールカード */
 .profileCard {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1rem;
+  border: none; /* 元のborderは不要に */
+  padding: 0;   /* 元のpaddingは不要に */
   text-align: center;
 }
 .avatarWrapper {

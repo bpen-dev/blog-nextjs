@@ -1,39 +1,32 @@
-/* app/layout.module.css */
-
-/* =====================================
-   グローバルで１行入れておくと横スクロールを根元から防げます
-   (※ globals.css 側に記載するのがベター)
-   html, body { overflow-x: hidden; }
-===================================== */
-
 /* =====  メイン＋サイドバーの２カラム  ===== */
 .container {
   display: flex;
-  /* 1200px を上限に、画面幅が狭ければ自動で縮む */
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  /* 左右パディングも画面幅に連動させて滑らかに変化 */
   padding-left: clamp(1rem, 2vw, 2rem);
   padding-right: clamp(1rem, 2vw, 2rem);
-  /* カラム間の余白も可変 */
   gap: clamp(1rem, 2vw, 2rem);
-  box-sizing: border-box; /* はみ出し対策 */
+  box-sizing: border-box;
+  
+  /* ↓↓↓ この一行を追加しました ↓↓↓ */
+  margin-top: 1.5rem; 
 }
 
 /* =====  メインコンテンツ  ===== */
 .main {
-  flex: 3;    /* 余った幅をすべて使う */
-  min-width: 0;  /* 子要素のはみ出しを抑制 */
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;     /* 記事カードの縦間隔 */
-    background-color: aliceblue; /* この行を追加 */
+  flex: 3;
+  min-width: 0;
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
 /* =====  サイドバー  ===== */
 .sidebar {
-  flex: 1;  /* この値を変更 */
+  flex: 1;
   min-width: 0; 
   display: flex;
   flex-direction: column;
@@ -48,12 +41,20 @@
     flex: 0 0 clamp(160px, 22%, 220px);
   }
 }
-@media (max-width: 1024px) { /* ← ここの数値を 768px から 1024px に変更 */
+
+/* =====  モバイル表示（サイドバー非表示） ===== */
+@media (max-width: 768px) {
   .container {
     flex-direction: column;
-    /* モバイルは左右パディングを少し小さく */
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 1rem; /* スマホでは余白を少し詰める */
+  }
+  .main {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    padding: 1rem;
   }
   .sidebar {
     display: none;

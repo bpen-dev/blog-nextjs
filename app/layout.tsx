@@ -38,7 +38,7 @@ export default async function RootLayout({ children }: Props) {
     <html lang="ja">
       <body>
         <Header />
-        <Nav tags={tags.contents} />
+        {/* <Nav tags={tags.contents} /> */}
 
         {/* ２カラム区域 */}
         <div className={styles.container}>

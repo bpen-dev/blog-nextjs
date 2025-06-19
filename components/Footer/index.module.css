@@ -1,6 +1,18 @@
+/* このファイルの内容をすべて以下のコードに置き換えてください */
+
 .footer {
-  padding: 16px 24px;
   text-align: center;
   color: var(--color-text-main);
   font-size: 0.8rem;
+
+  /* ↓↓↓ ここから追加・変更 ↓↓↓ */
+  background-color: #ffffff;        /* 背景を白に設定 */
+  margin-top: clamp(1rem, 2vw, 2rem); /* 上のコンテンツとの間に余白を作成 */
+  padding: 2rem 24px;                 /* フッター内部の余白を調整 */
+  border-top: 1px solid #E2E8F0;    /* 全体の背景との境界線を引く */
+}
+
+.cr {
+  margin: 0;
+  padding: 0;
 }
