@@ -25,6 +25,7 @@
 /* 検索フォーム */
 .searchForm {
   display: flex;
+  position: relative;
   border: 1px solid #ddd;
   border-radius: 4px;
   overflow: hidden;
@@ -34,9 +35,14 @@
   flex: 1;
   border: none;
   padding: 0.75rem;
+  padding-right: 2.5rem; 
   font-size: 0.95rem;
 }
 .searchForm button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
   border: none;
   background: none;
   color: #888;
