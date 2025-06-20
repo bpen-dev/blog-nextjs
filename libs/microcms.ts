@@ -31,6 +31,12 @@ export type Blog = {
   writer?: Writer;
 };
 
+// カテゴリの型定義
+export type Category = {
+  name: string;
+} & MicroCMSContentId &
+  MicroCMSDate;
+
 export type Article = Blog & MicroCMSContentId & MicroCMSDate;
 
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
@@ -88,6 +94,31 @@ export const getTag = async (contentId: string, queries?: MicroCMSQueries) => {
   const detailData = await client
     .getListDetail<Tag>({
       endpoint: 'tags',
+      contentId,
+      queries,
+    })
+    .catch(notFound);
+
+  return detailData;
+};
+
+// カテゴリの一覧を取得
+export const getCategoryList = async (queries?: MicroCMSQueries) => {
+  const listData = await client
+    .getList<Category>({
+      endpoint: 'categories', // microCMSのAPIエンドポイント名
+      queries,
+    })
+    .catch(notFound);
+
+  return listData;
+};
+
+// カテゴリの詳細を取得
+export const getCategory = async (contentId: string, queries?: MicroCMSQueries) => {
+  const detailData = await client
+    .getListDetail<Category>({
+      endpoint: 'categories', // microCMSのAPIエンドポイント名
       contentId,
       queries,
     })

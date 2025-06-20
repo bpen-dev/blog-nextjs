@@ -1,0 +1,35 @@
+.container {
+  /* このページのコンテナスタイル（必要であれば追加） */
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.listItem {
+  /* 各カテゴリ項目のスタイル */
+}
+
+.link {
+  display: block;
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  background-color: #F8F9FA;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.link:hover {
+  background-color: #F1F3F5;
+  transform: translateY(-2px);
+}

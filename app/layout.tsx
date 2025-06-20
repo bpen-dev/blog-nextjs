@@ -1,23 +1,23 @@
-import { getTagList } from '@/libs/microcms';
+import { getTagList, getCategoryList } from '@/libs/microcms'; // getCategoryList をインポート
 import { LIMIT } from '@/constants';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import Footer from '@/components/Footer';
-import Nav from '@/components/Nav';
+// Navは使わなくなったのでインポートを削除
 import './globals.css';
 import styles from './layout.module.css';
 
 export const metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
   title: {
-    template: '%s | Simple Blog',
-    default: 'Simple Blog',
+    template: '%s | 理系大学院生のぼちぼちITノート', // サイトタイトルを変更
+    default: '理系大学院生のぼちぼちITノート',    // サイトタイトルを変更
   },
   description: 'A simple blog presented by microCMS',
   openGraph: {
     title: {
-      template: '%s | Simple Blog',
-      default: 'Simple Blog',
+      template: '%s | 理系大学院生のぼちぼちITノート', // サイトタイトルを変更
+      default: '理系大学院生のぼちぼちITノート',    // サイトタイトルを変更
     },
     description: 'A simple blog presented by microCMS',
     images: '/ogp.png',
@@ -32,22 +32,25 @@ type Props = {
 };
 
 export default async function RootLayout({ children }: Props) {
-  const tags = await getTagList({ limit: LIMIT });
+  // getTagList は現在使っていないので、削除またはコメントアウトしてもOK
+  // const tags = await getTagList({ limit: LIMIT });
+  const categories = await getCategoryList({ limit: LIMIT }); // カテゴリ一覧を取得
 
   return (
     <html lang="ja">
       <body>
         <Header />
-        {/* <Nav tags={tags.contents} /> */}
+        
+        {/* Navを非表示にしたので削除 */}
 
         {/* ２カラム区域 */}
         <div className={styles.container}>
           {/* メインカラム */}
           <main className={styles.main}>{children}</main>
 
-          {/* サイドバー ― ラッパーに .sidebar クラスを必ず付与 */}
+          {/* サイドバーに categories を渡す */}
           <aside className={styles.sidebar}>
-            <Sidebar />
+            <Sidebar categories={categories.contents} />
           </aside>
         </div>
 
@@ -56,4 +59,3 @@ export default async function RootLayout({ children }: Props) {
     </html>
   );
 }
-

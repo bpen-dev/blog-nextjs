@@ -1,9 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
+import { Category } from '@/libs/microcms'; // Categoryの型をインポート
 import styles from './index.module.css';
 
+// Propsの型を定義
+type Props = {
+  categories?: Category[];
+};
 
-const Sidebar: React.FC = () => (
+const Sidebar: React.FC<Props> = ({ categories }) => (
   <div className={styles.sidebarInner}>
     {/* 検索ウィジェット */}
     <div className={styles.widget}>
@@ -18,17 +23,14 @@ const Sidebar: React.FC = () => (
     <div className={styles.widget}>
       <h3 className={styles.title}>カテゴリ</h3>
       <ul className={styles.categoryList}>
-        <li>
-          <Link href="/category/aws">
-            AWS <span className={styles.count}>5</span>
-          </Link>
-        </li>
-        <li>
-          <Link href="/category/career">
-            キャリア・就活 <span className={styles.count}>1</span>
-          </Link>
-        </li>
-        {/* 他カテゴリも同様に */}
+        {/* categoriesデータを使ってリストを動的に生成 */}
+        {categories?.map((category) => (
+          <li key={category.id}>
+            <Link href={`/categories/${category.id}`}>
+              {category.name}
+            </Link>
+          </li>
+        ))}
       </ul>
     </div>
 
@@ -55,16 +57,11 @@ const Sidebar: React.FC = () => (
           <li>TOEIC795</li>
         </ul>
         <div className={styles.iconList}>
-          {/* <button aria-label="ホーム">
-            <FaHome />
-          </button>
-          <button aria-label="閉じる">
-            <FaTimes />
-          </button> */}
+          {/* ...アイコン... */}
         </div>
       </div>
     </div>
   </div>
 )
 
-export default Sidebar
+export default Sidebar;
