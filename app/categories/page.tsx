@@ -6,6 +6,7 @@ export const metadata = {
   title: 'カテゴリ一覧',
 };
 
+
 export default async function Page() {
   const { contents: categories } = await getCategoryList();
 
