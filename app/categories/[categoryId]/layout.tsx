@@ -1,14 +1,16 @@
 import { getCategory } from '@/libs/microcms';
 import styles from './layout.module.css';
 
-type Props = {
+// Propsの型定義を、以下のように関数の引数に直接書く形に変更します。
+export default async function CategoriesLayout({
+  children,
+  params,
+}: {
   children: React.ReactNode;
   params: {
     categoryId: string;
   };
-};
-
-export default async function CategoriesLayout({ children, params }: Props) {
+}) {
   const category = await getCategory(params.categoryId);
   return (
     <div>
