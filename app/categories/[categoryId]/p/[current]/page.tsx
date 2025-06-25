@@ -5,13 +5,14 @@ import Pagination from '@/components/Pagination';
 import { Metadata } from 'next';
 
 type Props = {
-  params: {
+  params: Promise<{
     categoryId: string;
     current: string;
-  };
+  }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params: paramsPromise }: Omit<Props, 'children'>): Promise<Metadata> {
+  const params = await paramsPromise;
   const category = await getCategory(params.categoryId);
   return {
     title: `${category.name} - ${params.current}ページ目`,
@@ -19,7 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params: paramsPromise }: Props) {
+  const params = await paramsPromise;
   const current = parseInt(params.current, 10);
   const { categoryId } = params;
 
