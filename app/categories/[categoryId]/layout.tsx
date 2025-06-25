@@ -1,7 +1,6 @@
 import { getCategory } from '@/libs/microcms';
 import styles from './layout.module.css';
 
-// Propsの型を定義します
 type Props = {
   children: React.ReactNode;
   params: {
@@ -9,10 +8,7 @@ type Props = {
   };
 };
 
-export default async function CategoriesLayout({
-  children,
-  params,
-}: Props) {
+export default async function CategoriesLayout({ children, params }: Props) {
   // `params` を直接使用してカテゴリを取得します
   const category = await getCategory(params.categoryId);
   return (
