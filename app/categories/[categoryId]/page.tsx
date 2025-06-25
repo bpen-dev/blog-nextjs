@@ -4,15 +4,14 @@ import ArticleList from '@/components/ArticleList';
 import Pagination from '@/components/Pagination';
 import { Metadata } from 'next';
 
-// layout.tsx と同じようにPropsの型を定義します
 type Props = {
-  params: {
+  params: Promise<{
     categoryId: string;
-  };
+  }>;
 };
 
-// generateMetadata と Page の両方で、同じPropsの型を使います
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params: paramsPromise }: Props): Promise<Metadata> {
+  const params = await paramsPromise;
   const category = await getCategory(params.categoryId);
   return {
     title: category.name,
@@ -20,7 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params: paramsPromise }: Props) {
+  const params = await paramsPromise;
   const { categoryId } = params;
   const data = await getList({
     limit: LIMIT,
