@@ -42,6 +42,18 @@
 
 
 /* --- 検索モーダルのスタイル --- */
+
+.modalTitle {
+    text-align: center;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.closeButton:hover {
+  color: #333;
+}
+
 .overlay {
   position: fixed;
   top: 0;
@@ -50,44 +62,33 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
   display: flex;
-  align-items: flex-start;
-  padding-top: 15vh;
+  align-items: center;
   justify-content: center;
-  z-index: 1500;
+  z-index: 1500; /* BottomNavより手前に表示 */
 }
 
 .modal {
   background-color: white;
   padding: 24px;
-  border-radius: 12px;
+  border-radius: 8px;
   width: 90%;
   max-width: 500px;
   position: relative;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-.modalTitle {
+.title {
     margin-top: 0;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    color: #333;
+    margin-bottom: 1rem;
 }
 
 .closeButton {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 10px;
+  right: 10px;
   background: none;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.closeButton:hover {
-  color: #333;
 }
 
 /* --- スライドメニュー表示用のクラス(Contextから利用) --- */
