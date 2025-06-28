@@ -1,4 +1,4 @@
-/* =====  メイン＋サイドバーの２カラム  ===== */
+/* ===== メイン＋サイドバーの２カラム ===== */
 .container {
   display: flex;
   width: 100%;
@@ -8,93 +8,110 @@
   padding-right: clamp(1rem, 2vw, 2rem);
   gap: clamp(1rem, 2vw, 2rem);
   box-sizing: border-box;
-  
-  /* ↓↓↓ この一行を追加しました ↓↓↓ */
-  margin-top: 1.5rem; 
+  margin-top: 1.5rem;
 }
 
-/* =====  メインコンテンツ  ===== */
+/* ===== メインコンテンツ ===== */
 .main {
   flex: 3;
   min-width: 0;
   background-color: #ffffff;
-  border: 1px solid #E2E8F0;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
-/* =====  サイドバー  ===== */
-.sidebar {
+/* ===== PC用サイドバーのラッパー ===== */
+.desktopSidebarWrapper {
   flex: 1;
-  min-width: 0; 
-  display: flex;
-  flex-direction: column;
+  min-width: 0;
 }
 
-/* =====  1024px 以下：余白＆サイド幅を微調整  ===== */
+/* ===== モバイル用サイドバーのラッパー (PCでは非表示) ===== */
+.mobileSidebarWrapper {
+  display: none;
+}
+
+
+/* --- ここからモバイル用のスライドメニューのスタイル --- */
+/* 背景のオーバーレイ */
+.overlay {
+  display: none; /* 通常は非表示 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1100; /* サイドバー本体よりは下 */
+}
+/* .showクラスが付くと表示 */
+.overlay.show {
+  display: block;
+}
+
+/* スライドしてくるサイドバー本体 */
+.sidebar {
+  display: none; /* PCではこのスタイルは適用されない */
+}
+
+
+/* ===== 1024px 以下：サイド幅を微調整 ===== */
 @media (max-width: 1024px) {
   .container {
     gap: 1.25rem;
   }
-  .sidebar {
+  .desktopSidebarWrapper {
     flex: 0 0 clamp(160px, 22%, 220px);
   }
 }
 
-/* =====  モバイル表示（サイドバー非表示） ===== */
+/* ===== 768px 以下 (モバイル) のスタイル ===== */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
     padding-left: 0;
     padding-right: 0;
-    margin-top: 1rem; /* スマホでは余白を少し詰める */
+    margin-top: 1rem;
   }
   .main {
     border-radius: 0;
     border-left: none;
     border-right: none;
     padding: 1rem;
-  }
-  .sidebar {
-    display: none;
-  }
-}
-
-/* app/layout.module.css の末尾に追記 */
-
-/* =====  モバイル表示（サイドバー非表示） ===== */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    padding-left: 0;
-    padding-right: 0;
-    margin-top: 1rem; /* スマホでは余白を少し詰める */
-  }
-  .main {
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-    padding: 1rem;
-    /* ↓↓↓ ボトムメニューの高さ分、下部に余白を追加 */
     padding-bottom: 80px;
   }
+  
+  /* PC用サイドバーを非表示に */
+  .desktopSidebarWrapper {
+    display: none;
+  }
+  
+  /* モバイル用サイドバーのラッパーを表示 */
+  .mobileSidebarWrapper {
+    display: block;
+  }
+
+  /* スライドメニュー本体の挙動を定義 */
   .sidebar {
-    /* ↓↓↓ 元の display: none; は削除またはコメントアウト */
-    /* display: none; */
-    
-    /* ↓↓↓ サイドバーを画面外に配置するスタイルを追加 */
+    display: block; /* transformで制御するためblockに */
     position: fixed;
     top: 0;
     right: 0;
-    width: 280px; /* サイドバーの幅 */
+    width: 280px;
     height: 100%;
-    z-index: 1200;
-    background-color: #f7f7f7;
+    z-index: 1200; /* オーバーレイより上 */
+    background-color: #ffffff;
     overflow-y: auto;
-    transform: translateX(100%);
+    transform: translateX(100%); /* 初期状態では画面右外に配置 */
     transition: transform 0.3s ease-in-out;
-    padding: 1rem;
+    padding: 0;
     border-left: 1px solid #e2e8f0;
+  }
+  
+  /* .showクラスが付くと画面内にスライド */
+  .sidebar.show {
+    transform: translateX(0);
   }
 }

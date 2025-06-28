@@ -1,24 +1,25 @@
-import { getTagList, getCategoryList } from '@/libs/microcms'; // getCategoryList をインポート
-import { LIMIT } from '@/constants';
+import { getCategoryList } from '@/libs/microcms';
+import { LIMIT } from '@/constants/index';
 import Header from '@/components/Header';
-import Sidebar from '@/components/Sidebar';
 import Footer from '@/components/Footer';
-// Navは使わなくなったのでインポートを削除
+import BottomNav from '@/components/BottomNav';
+import Sidebar from '@/components/Sidebar';
+import { SidebarProvider } from '@/context/SidebarContext';
+import SidebarWrapper from '@/components/Sidebar/SidebarWrapper';
 import './globals.css';
 import styles from './layout.module.css';
-import BottomNav from '@/components/BottomNav';
 
 export const metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
   title: {
-    template: '%s | 理系大学院生のぼちぼちITノート', // サイトタイトルを変更
-    default: '理系大学院生のぼちぼちITノート',    // サイトタイトルを変更
+    template: '%s | 理系大学院生のぼちぼちITノート',
+    default: '理系大学院生のぼちぼちITノート',
   },
   description: 'A simple blog presented by microCMS',
   openGraph: {
     title: {
-      template: '%s | 理系大学院生のぼちぼちITノート', // サイトタイトルを変更
-      default: '理系大学院生のぼちぼちITノート',    // サイトタイトルを変更
+      template: '%s | 理系大学院生のぼちぼちITノート',
+      default: '理系大学院生のぼちぼちITノート',
     },
     description: 'A simple blog presented by microCMS',
     images: '/ogp.png',
@@ -33,30 +34,29 @@ type Props = {
 };
 
 export default async function RootLayout({ children }: Props) {
-  // getTagList は現在使っていないので、削除またはコメントアウトしてもOK
-  // const tags = await getTagList({ limit: LIMIT });
-  const categories = await getCategoryList({ limit: LIMIT }); // カテゴリ一覧を取得
+  const categories = await getCategoryList({ limit: LIMIT });
 
   return (
     <html lang="ja">
       <body>
-        <Header />
-        
-        {/* Navを非表示にしたので削除 */}
+        <SidebarProvider>
+          <Header />
+          <div className={styles.container}>
+            <main className={styles.main}>{children}</main>
 
-        {/* ２カラム区域 */}
-        <div className={styles.container}>
-          {/* メインカラム */}
-          <main className={styles.main}>{children}</main>
+            {/* PC用のサイドバー (専用ラッパーで囲む) */}
+            <div className={styles.desktopSidebarWrapper}>
+              <Sidebar categories={categories.contents} />
+            </div>
 
-          {/* サイドバーに categories を渡す */}
-          <aside className={styles.sidebar}>
-            <Sidebar categories={categories.contents} />
-          </aside>
-        </div>
-
-        <Footer />
-        <BottomNav />
+            {/* モバイル用のサイドバーラッパー (専用ラッパーで囲む) */}
+            <div className={styles.mobileSidebarWrapper}>
+              <SidebarWrapper categories={categories.contents} />
+            </div>
+          </div>
+          <Footer />
+          <BottomNav />
+        </SidebarProvider>
       </body>
     </html>
   );
