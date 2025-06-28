@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 // Navは使わなくなったのでインポートを削除
 import './globals.css';
 import styles from './layout.module.css';
+import BottomNav from '@/components/BottomNav';
 
 export const metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
@@ -55,6 +56,7 @@ export default async function RootLayout({ children }: Props) {
         </div>
 
         <Footer />
+        <BottomNav />
       </body>
     </html>
   );

@@ -1,16 +1,41 @@
-.search {
-  padding: 0 24px 0 48px;
-  border: 1px solid var(--color-border-dark);
-  border-radius: 20px;
-  width: 600px;
-  height: 40px;
-  box-sizing: border-box;
-  background: url('/search.svg') no-repeat 16px center;
+.form {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
 }
 
-@media (max-width: 640px) {
-  .search {
-    width: 100%;
-    margin: 0 24px;
-  }
+.search {
+  width: 100%;
+  padding: 12px 16px; /* パディングを調整 */
+  padding-right: 48px; /* ボタンの領域を確保 */
+  border: 2px solid #e2e8f0;
+  border-radius: 9999px; /* 角を丸くしてカプセル型に */
+  font-size: 1rem;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.search:focus {
+  outline: none;
+  border-color: #4a90e2; /* フォーカス時に色を変更 */
+}
+
+.button {
+  position: absolute;
+  right: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: #357abd;
 }

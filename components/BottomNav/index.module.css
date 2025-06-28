@@ -1,0 +1,59 @@
+.nav {
+  /* PCでは非表示 */
+  display: none;
+}
+
+/* 画面幅が768px以下の場合に表示 */
+@media (max-width: 768px) {
+  /* 既存の .nav のスタイルを修正 */
+@media (max-width: 768px) {
+  .nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    z-index: 1000;
+    /* ↓↓↓ アニメーション効果を追加 */
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(0);
+  }
+
+  /* ↓↓↓ 非表示用のスタイルを新規追加 */
+  .hidden {
+    transform: translateY(100%);
+  }
+}
+
+    /* 既存の .item スタイルを修正 */
+    .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px; /* 少し詰める */
+    font-size: 0.7rem; /* 少し小さく */
+    color: #4a5568;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 0; /* 上下に少しパディング */
+    flex: 1;
+    text-decoration: none; /* Linkタグの名残があれば消す */
+    }
+
+  .item:hover {
+    color: #2d3748;
+  }
+}
+
+/* サイドバーの表示/非表示を制御するクラス */
+/* このCSSはJSによってsidebar要素に付与されます */
+.show {
+  display: block !important;
+  transform: translateX(0) !important;
+}
