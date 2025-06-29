@@ -3,7 +3,15 @@ import { getDetail } from '@/libs/microcms';
 import Article from '@/components/Article';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
-// Remove custom Props interface and use Next.js PageProps directly
+type Props = {
+  params: Promise<{ // paramsの型をPromise<T>に修正
+    slug: string;
+  }>;
+  searchParams: Promise<{ // searchParamsの型をPromise<T>に修正
+    dk?: string; // draftKey（dk）をオプションとして定義
+    [key: string]: string | string[] | undefined; // 他の任意の文字列キー（stringまたはstring[]の値、あるいはundefined）も許容
+  }>;
+};
 
 // パンくずリストの各項目の型
 type Crumb = {
@@ -12,13 +20,11 @@ type Crumb = {
   isCategory?: boolean;
 };
 
-// Removed duplicate and incorrect generateMetadata definition
-export async function generateMetadata(
-  props: { params: { slug: string }; searchParams?: { [key: string]: string | string[] | undefined } }
-): Promise<Metadata> {
-  const { params, searchParams } = props;
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params; // props.paramsをawaitで解決
+  const searchParams = await props.searchParams; // props.searchParamsをawaitで解決
   const data = await getDetail(params.slug, {
-    draftKey: Array.isArray(searchParams?.dk) ? searchParams?.dk[0] : searchParams?.dk,
+    draftKey: searchParams?.dk,
   });
 
   return {
@@ -30,20 +36,17 @@ export async function generateMetadata(
       images: [data?.thumbnail?.url || ''],
     },
     alternates: {
-      canonical: `/articles/${params.slug}`,
+      canonical: `/articles/${params.slug}`, // await済みのparamsを使用
     },
   };
 }
 
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
+export default async function Page(props: Props) {
+  const params = await props.params; // props.paramsをawaitで解決
+  const searchParams = await props.searchParams; // props.searchParamsをawaitで解決
+  // 修正点：getDetailに渡すパラメータを修正 (修正済み)
   const data = await getDetail(params.slug, {
-    draftKey: Array.isArray(searchParams?.dk) ? searchParams?.dk[0] : searchParams?.dk,
+    draftKey: searchParams?.dk,
     depth: 1, 
   });
 
