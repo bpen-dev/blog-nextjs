@@ -5,7 +5,7 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   overflow: hidden;
   transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .list:hover {
@@ -16,30 +16,32 @@
 .link {
   display: flex;
   gap: 0;
+  align-items: center; /* 追加: 画像とコンテンツを上下中央に配置 */
 }
 
 .image {
   width: 280px;
-  height: 100%;
+  height: 147px; /* 1200x630 (実質240x126) のアスペクト比を維持するための高さに調整 */
   object-fit: cover;
+  margin: .5rem;
 }
 
 .content {
-  padding: 1.5rem;
+  padding: 0.75rem;
   display: flex;
   flex-direction: column;
   flex: 1; /* 伸びるように指定 */
 }
 
 .title {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 0.75rem;
   color: #2D3748;
 }
 
 .date {
   margin-top: auto;
+  font-size: 0.8rem
 }
 
 @media (max-width: 640px) {
@@ -49,7 +51,7 @@
   .image {
     width: 100%;
     height: auto;
-    margin-bottom: 0;
+    margin:auto;
   }
   .content {
     padding: 1rem 1.25rem;
