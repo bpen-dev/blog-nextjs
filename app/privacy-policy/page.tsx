@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link'; 
 // 免責事項ページと同じスタイルを共用
 import styles from '../disclaimer/page.module.css';
 
@@ -67,6 +68,14 @@ export default function PrivacyPolicyPage() {
             修正された最新のプライバシーポリシーは常に本ページにて開示されます。
         </p>
         </div>
+        <h2>お問い合わせ</h2>
+        <p>
+          当社の個人情報の取扱に関するお問い合せは下記までご連絡ください。
+          <br />
+          <Link href="/contact" style={{ textDecoration: 'underline' }}>
+            お問い合わせフォーム
+          </Link>
+        </p>
     </div>
   );
 }

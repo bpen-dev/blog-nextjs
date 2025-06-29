@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link'; 
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -42,11 +43,12 @@ export default function DisclaimerPage() {
 
   <h2>著作権・肖像権について</h2>
   <p>
-    当ブログで掲載している文章や画像などにつきましては、無断転載することを禁止します。
-  </p>
-  <p>
-    当ブログは著作権や肖像権の侵害を目的としたものではありません。著作権や肖像権に関して問題がございましたら、お問い合わせフォームよりご連絡ください。迅速に対応いたします。
-  </p>
+          当ブログは著作権や肖像権の侵害を目的としたものではありません。著作権や肖像権に関して問題がございましたら、
+          <Link href="/contact" style={{ textDecoration: 'underline' }}>
+            お問い合わせフォーム
+          </Link>
+          よりご連絡ください。迅速に対応いたします。
+        </p>
 
   <h2>リンクについて</h2>
   <p>
