@@ -3,10 +3,7 @@ import { getDetail } from '@/libs/microcms';
 import Article from '@/components/Article';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
-interface Props {
-  params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
+// Remove custom Props interface and use Next.js PageProps directly
 
 // パンくずリストの各項目の型
 type Crumb = {
@@ -15,7 +12,11 @@ type Crumb = {
   isCategory?: boolean;
 };
 
-export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+// Removed duplicate and incorrect generateMetadata definition
+export async function generateMetadata(
+  props: { params: { slug: string }; searchParams?: { [key: string]: string | string[] | undefined } }
+): Promise<Metadata> {
+  const { params, searchParams } = props;
   const data = await getDetail(params.slug, {
     draftKey: Array.isArray(searchParams?.dk) ? searchParams?.dk[0] : searchParams?.dk,
   });
@@ -34,7 +35,13 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   };
 }
 
-export default async function Page({ params, searchParams }: Props) {
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
   const data = await getDetail(params.slug, {
     draftKey: Array.isArray(searchParams?.dk) ? searchParams?.dk[0] : searchParams?.dk,
     depth: 1, 
