@@ -63,12 +63,16 @@ const Sidebar: React.FC<Props> = ({ categories }) => {
           <span>プロフィール</span>
         </h3>
         <div className={styles.profileCard}>
-          <img
-            src="/images/profile.jpg"
-            alt="プロフィール画像"
-            className={styles.profileImage}
-          />
-          <p className={styles.profileName}>ぼちペン</p>
+          {/* ↓↓↓ ここから修正 ↓↓↓ */}
+          <Link href="/writer" className={styles.profileLink}>
+            <img
+              src="/images/profile.webp"
+              alt="プロフィール画像"
+              className={styles.profileImage}
+            />
+            <p className={styles.profileName}>ぼちペン</p>
+          </Link>
+          {/* ↑↑↑ ここまで修正 ↑↑↑ */}
           <p className={styles.profileDesc}>
             2026年からSIerでSEになる予定の大学院生。キャリアに迷いつつ、AWSを中心にITを幅広く勉強中。
           </p>
