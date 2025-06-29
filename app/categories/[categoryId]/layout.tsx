@@ -4,13 +4,14 @@ import styles from './layout.module.css';
 
 type Props = {
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     categoryId: string;
-  };
+  }>;
 };
 
 export default async function CategoriesLayout({ children, params }: Props) {
-  const category = await getCategory(params.categoryId);
+  const awaitedParams = await params; // paramsをawaitで解決
+  const category = await getCategory(awaitedParams.categoryId);
   
   // パンくずリスト用のデータを構築
   const crumbs = [
