@@ -39,6 +39,15 @@ export type Category = {
 
 export type Article = Blog & MicroCMSContentId & MicroCMSDate;
 
+// ↓↓↓ ここから追加 ↓↓↓
+// お問い合わせの型定義
+export type Contact = {
+  name: string;
+  email: string;
+  message: string;
+};
+// ↑↑↑ ここまで追加 ↑↑↑
+
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
   throw new Error('MICROCMS_SERVICE_DOMAIN is required');
 }
@@ -106,7 +115,7 @@ export const getTag = async (contentId: string, queries?: MicroCMSQueries) => {
 export const getCategoryList = async (queries?: MicroCMSQueries) => {
   const listData = await client
     .getList<Category>({
-      endpoint: 'categories', // microCMSのAPIエンドポイント名
+      endpoint: 'categories',
       queries,
     })
     .catch(notFound);
@@ -118,7 +127,7 @@ export const getCategoryList = async (queries?: MicroCMSQueries) => {
 export const getCategory = async (contentId: string, queries?: MicroCMSQueries) => {
   const detailData = await client
     .getListDetail<Category>({
-      endpoint: 'categories', // microCMSのAPIエンドポイント名
+      endpoint: 'categories',
       contentId,
       queries,
     })
@@ -126,3 +135,13 @@ export const getCategory = async (contentId: string, queries?: MicroCMSQueries) 
 
   return detailData;
 };
+
+// ↓↓↓ ここから追加 ↓↓↓
+// お問い合わせを作成
+export const createContact = async (data: Contact) => {
+  return await client.create({
+    endpoint: 'contacts',
+    content: data,
+  });
+};
+// ↑↑↑ ここまで追加 ↑↑↑
