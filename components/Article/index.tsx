@@ -15,7 +15,7 @@ export default function Article({ data }: Props) {
     <main className={styles.main}>
       <h1 className={styles.title}>{data.title}</h1>
       <TagList tags={data.tags} />
-      <p className={styles.description}>{data.description}</p>
+      {/* <p className={styles.description}>{data.description}</p> */}
       <div className={styles.meta}>
         {data.writer && (
           <Link href={`/writer/${data.writer.id}`} className={styles.writerLink}>
@@ -37,7 +37,7 @@ export default function Article({ data }: Props) {
             </div>
           </Link>
         )}
-        <PublishedDate date={data.publishedAt || data.createdAt} />
+        
       </div>
       <picture>
         <source
@@ -57,6 +57,7 @@ export default function Article({ data }: Props) {
           height={data.thumbnail?.height}
         />
       </picture>
+      <PublishedDate date={data.publishedAt || data.createdAt} />
       <div
         className={styles.content}
         dangerouslySetInnerHTML={{
