@@ -3,15 +3,10 @@ import { getDetail } from '@/libs/microcms';
 import Article from '@/components/Article';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
-type Props = {
-  params: {
-    slug: string;
-  };
-  searchParams: {
-    dk?: string;
-    [key: string]: string | string[] | undefined;
-  };
-};
+interface Props {
+  params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
 
 // パンくずリストの各項目の型
 type Crumb = {
@@ -20,11 +15,9 @@ type Crumb = {
   isCategory?: boolean;
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = props.params;
-  const searchParams = props.searchParams;
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const data = await getDetail(params.slug, {
-    draftKey: searchParams?.dk,
+    draftKey: Array.isArray(searchParams?.dk) ? searchParams?.dk[0] : searchParams?.dk,
   });
 
   return {
@@ -35,18 +28,15 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       description: data.description,
       images: [data?.thumbnail?.url || ''],
     },
-    alternates: { ///page.tsx]
+    alternates: {
       canonical: `/articles/${params.slug}`,
     },
   };
 }
 
-export default async function Page(props: Props) {
-  const params = props.params;
-  const searchParams = props.searchParams;
-  // 修正点：getDetailに渡すパラメータを修正 (修正済み)
+export default async function Page({ params, searchParams }: Props) {
   const data = await getDetail(params.slug, {
-    draftKey: searchParams?.dk,
+    draftKey: Array.isArray(searchParams?.dk) ? searchParams?.dk[0] : searchParams?.dk,
     depth: 1, 
   });
 
