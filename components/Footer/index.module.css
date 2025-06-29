@@ -1,16 +1,31 @@
-/* このファイルの内容をすべて以下のコードに置き換えてください */
-
 .footer {
   text-align: center;
   color: var(--color-text-main);
   font-size: 0.8rem;
-
-  /* ↓↓↓ ここから追加・変更 ↓↓↓ */
-  background-color: #ffffff;        /* 背景を白に設定 */
-  margin-top: clamp(1rem, 2vw, 2rem); /* 上のコンテンツとの間に余白を作成 */
-  padding: 2rem 24px;                 /* フッター内部の余白を調整 */
-  border-top: 1px solid #E2E8F0;    /* 全体の背景との境界線を引く */
+  background-color: #ffffff;
+  margin-top: clamp(1rem, 2vw, 2rem);
+  padding: 2rem 24px;
+  border-top: 1px solid #E2E8F0;
 }
+
+/* ↓↓↓ ここから追加 ↓↓↓ */
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.link {
+  color: var(--color-text-sub);
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+
+.link:hover {
+  color: var(--color-text-main);
+}
+/* ↑↑↑ ここまで追加 ↑↑↑ */
 
 .cr {
   margin: 0;
