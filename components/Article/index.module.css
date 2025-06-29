@@ -6,17 +6,16 @@
 }
 
 .title {
-  font-size: 2.4rem;
-  margin-bottom: 24px;
-  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 5px;
 }
 
-.description {
+/* .description {
   font-size: 0.9rem;
   color: var(--color-text-sub);
   margin: 24px 40px;
   text-align: center;
-}
+} */
 
 .meta {
   display: flex;
@@ -48,7 +47,7 @@
   max-width: 960px;
   width: 100%;
   height: auto;
-  margin-bottom: 64px;
+  margin:0;
 }
 
 .content {
@@ -196,9 +195,8 @@
 
 @media (max-width: 640px) {
   .title {
-    font-size: 2rem;
+    font-size: 1.2rem;
     margin-bottom: 20px;
-    text-align: center;
   }
 
   .description {
