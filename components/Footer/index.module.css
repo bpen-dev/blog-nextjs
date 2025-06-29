@@ -8,7 +8,6 @@
   border-top: 1px solid #E2E8F0;
 }
 
-/* ↓↓↓ ここから追加 ↓↓↓ */
 .nav {
   display: flex;
   justify-content: center;
@@ -25,9 +24,17 @@
 .link:hover {
   color: var(--color-text-main);
 }
-/* ↑↑↑ ここまで追加 ↑↑↑ */
 
 .cr {
   margin: 0;
   padding: 0;
 }
+
+/* ↓↓↓ ここから追加 ↓↓↓ */
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column; /* 縦並びに変更 */
+    gap: 1rem; /* 項目間のスペースを少し調整 */
+  }
+}
+/* ↑↑↑ ここまで追加 ↑↑↑ */
