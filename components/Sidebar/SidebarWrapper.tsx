@@ -3,13 +3,14 @@
 import Sidebar from '@/components/Sidebar';
 import { useSidebar } from '@/context/SidebarContext';
 import styles from '@/app/layout.module.css';
-import { Category } from '@/libs/microcms';
+import { Category, PopularTag } from '@/libs/microcms';
 
 type Props = {
   categories: Category[];
+  popularTags: PopularTag[];
 };
 
-export default function SidebarWrapper({ categories }: Props) {
+export default function SidebarWrapper({ categories, popularTags }: Props) {
   const { isOpen, toggleSidebar } = useSidebar();
 
   return (
@@ -20,7 +21,7 @@ export default function SidebarWrapper({ categories }: Props) {
         onClick={toggleSidebar}
       />
       <aside id="sidebar" className={`${styles.sidebar} ${isOpen ? styles.show : ''}`}>
-        <Sidebar categories={categories} />
+        <Sidebar categories={categories} popularTags={popularTags} />
       </aside>
     </div>
   );

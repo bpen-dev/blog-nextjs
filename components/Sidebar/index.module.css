@@ -51,6 +51,29 @@
   color: white;
 }
 
+.tagList {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tagLink {
+  display: block;
+  padding: 0.3rem 0.8rem;
+  background-color: #f0f2f5;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  color: #4a5568;
+  transition: background-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.tagLink:hover {
+  background-color: #555;
+  color: white;
+}
+
 .profileCard {
   text-align: center;
 }
@@ -60,7 +83,6 @@
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  /* margin: 0 auto 0.5rem; */
   border: 3px solid #f0f2f5;
 }
 
@@ -73,7 +95,7 @@
 
 .profileLink {
   text-decoration: none;
-  display: block; /* or inline-block */
+  display: block;
   text-align: center;
 }
 
@@ -109,7 +131,6 @@
   border-radius: 4px;
 }
 
-/* --- 検索ウィジェット --- */
 .searchForm {
   display: flex;
   position: relative;
@@ -145,7 +166,6 @@
   cursor: pointer;
 }
 
-/* --- レスポンシブ設定 --- */
 @media (max-width: 768px) {
   .sidebarInner {
     box-shadow: none;
@@ -176,7 +196,6 @@
     padding: 0 1.5rem;
   }
 
-  /* モバイルではPC用検索ウィジェットを非表示に */
   .searchWidget {
     display: none;
   }

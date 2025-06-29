@@ -1,4 +1,4 @@
-import { getCategoryList } from '@/libs/microcms';
+import { getCategoryListWithoutNotFound, getAllArticlesForLayout, getAllTagsForLayout } from '@/libs/microcms';
 import { LIMIT } from '@/constants/index';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -8,6 +8,7 @@ import { SidebarProvider } from '@/context/SidebarContext';
 import SidebarWrapper from '@/components/Sidebar/SidebarWrapper';
 import './globals.css';
 import styles from './layout.module.css';
+import { PopularTag } from '@/libs/microcms';
 
 export const metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
@@ -34,7 +35,25 @@ type Props = {
 };
 
 export default async function RootLayout({ children }: Props) {
-  const categories = await getCategoryList({ limit: LIMIT });
+  const categories = await getCategoryListWithoutNotFound({ limit: LIMIT });
+  const tags = await getAllTagsForLayout();
+  const all_articles = await getAllArticlesForLayout({ fields: ['tags'] });
+
+  const tag_counts = all_articles.contents.reduce((acc: Record<string, number>, article) => {
+    article.tags?.forEach(tag => {
+      acc[tag.id] = (acc[tag.id] || 0) + 1;
+    });
+    return acc;
+  }, {});
+  
+  const popularTags: PopularTag[] = tags.contents
+    .map(tag => ({
+      ...tag,
+      count: tag_counts[tag.id] || 0,
+    }))
+    .filter(tag => tag.count > 0)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 6);
 
   return (
     <html lang="ja">
@@ -44,14 +63,12 @@ export default async function RootLayout({ children }: Props) {
           <div className={styles.container}>
             <main className={styles.main}>{children}</main>
 
-            {/* PC用のサイドバー (専用ラッパーで囲む) */}
             <div className={styles.desktopSidebarWrapper}>
-              <Sidebar categories={categories.contents} />
+              <Sidebar categories={categories.contents} popularTags={popularTags} />
             </div>
 
-            {/* モバイル用のサイドバーラッパー (専用ラッパーで囲む) */}
             <div className={styles.mobileSidebarWrapper}>
-              <SidebarWrapper categories={categories.contents} />
+              <SidebarWrapper categories={categories.contents} popularTags={popularTags} />
             </div>
           </div>
           <Footer />

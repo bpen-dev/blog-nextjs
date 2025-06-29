@@ -2,16 +2,17 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Category } from '@/libs/microcms';
-import { FiFolder, FiUser, FiSearch, FiX } from 'react-icons/fi';
+import { Category, PopularTag } from '@/libs/microcms';
+import { FiFolder, FiUser, FiSearch, FiX, FiTag } from 'react-icons/fi';
 import { useSidebar } from '@/context/SidebarContext';
 import styles from './index.module.css';
 
 type Props = {
   categories?: Category[];
+  popularTags?: PopularTag[];
 };
 
-const Sidebar: React.FC<Props> = ({ categories }) => {
+const Sidebar: React.FC<Props> = ({ categories, popularTags }) => {
   const { toggleSidebar } = useSidebar();
 
   return (
@@ -59,11 +60,27 @@ const Sidebar: React.FC<Props> = ({ categories }) => {
 
       <div className={styles.section}>
         <h3 className={styles.title}>
+          <FiTag />
+          <span>人気のタグ</span>
+        </h3>
+        <ul className={styles.tagList}>
+          {popularTags?.map((tag) => (
+            <li key={tag.id}>
+              {/* ↓↓↓ ここの () を削除しました ↓↓↓ */}
+              <Link href={`/tags/${tag.id}`} className={styles.tagLink}>
+                #{tag.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className={styles.section}>
+        <h3 className={styles.title}>
           <FiUser />
           <span>プロフィール</span>
         </h3>
         <div className={styles.profileCard}>
-          {/* ↓↓↓ ここから修正 ↓↓↓ */}
           <Link href="/writer" className={styles.profileLink}>
             <img
               src="/images/profile.webp"
@@ -72,7 +89,6 @@ const Sidebar: React.FC<Props> = ({ categories }) => {
             />
             <p className={styles.profileName}>ぼちペン</p>
           </Link>
-          {/* ↑↑↑ ここまで修正 ↑↑↑ */}
           <p className={styles.profileDesc}>
             2026年からSIerでSEになる予定の大学院生。キャリアに迷いつつ、AWSを中心にITを幅広く勉強中。
           </p>
