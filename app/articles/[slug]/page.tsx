@@ -8,7 +8,8 @@ type Props = {
     slug: string;
   };
   searchParams: {
-    dk: string;
+    dk?: string; // draftKey（dk）をオプションとして定義
+    [key: string]: string | string[] | undefined; // 他の任意の文字列キー（stringまたはstring[]の値、あるいはundefined）も許容
   };
 };
 
@@ -21,7 +22,7 @@ type Crumb = {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const data = await getDetail(props.params.slug, {
-    draftKey: props.searchParams.dk,
+    draftKey: props.searchParams?.dk, // 安全なアクセスに変更
   });
 
   return {
@@ -41,7 +42,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 export default async function Page(props: Props) {
   // 修正点：getDetailに渡すパラメータを修正
   const data = await getDetail(props.params.slug, {
-    draftKey: props.searchParams.dk,
+    draftKey: props.searchParams?.dk,
     depth: 1, 
   });
 
