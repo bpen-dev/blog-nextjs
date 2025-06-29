@@ -21,8 +21,8 @@ type Crumb = {
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = await props.params; // props.paramsをawaitで解決
-  const searchParams = await props.searchParams; // props.searchParamsをawaitで解決
+  const params = props.params;
+  const searchParams = props.searchParams;
   const data = await getDetail(params.slug, {
     draftKey: searchParams?.dk,
   });
@@ -36,14 +36,14 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       images: [data?.thumbnail?.url || ''],
     },
     alternates: { ///page.tsx]
-      canonical: `/articles/${params.slug}`, // await済みのparamsを使用
+      canonical: `/articles/${params.slug}`,
     },
   };
 }
 
 export default async function Page(props: Props) {
-  const params = await props.params; // props.paramsをawaitで解決
-  const searchParams = await props.searchParams; // props.searchParamsをawaitで解決
+  const params = props.params;
+  const searchParams = props.searchParams;
   // 修正点：getDetailに渡すパラメータを修正 (修正済み)
   const data = await getDetail(params.slug, {
     draftKey: searchParams?.dk,
