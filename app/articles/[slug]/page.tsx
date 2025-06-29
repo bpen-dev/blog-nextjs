@@ -4,12 +4,12 @@ import Article from '@/components/Article';
 import Breadcrumbs from '@/components/Breadcrumbs';
 
 type Props = {
-  params: Promise<{ // paramsの型をPromise<T>に修正
+  params: {
     slug: string;
-  }>;
-  searchParams: { // searchParamsオブジェクトは常に存在しますが、そのキーはオプションである可能性があります
-    dk?: string; // draftKey（dk）をオプションとして定義
-    [key: string]: string | string[] | undefined; // 他の任意の文字列キー（stringまたはstring[]の値、あるいはundefined）も許容
+  };
+  searchParams: {
+    dk?: string;
+    [key: string]: string | string[] | undefined;
   };
 };
 
@@ -22,8 +22,9 @@ type Crumb = {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params; // props.paramsをawaitで解決
+  const searchParams = await props.searchParams; // props.searchParamsをawaitで解決
   const data = await getDetail(params.slug, {
-    draftKey: props.searchParams?.dk,
+    draftKey: searchParams?.dk,
   });
 
   return {
@@ -42,9 +43,10 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
 export default async function Page(props: Props) {
   const params = await props.params; // props.paramsをawaitで解決
+  const searchParams = await props.searchParams; // props.searchParamsをawaitで解決
   // 修正点：getDetailに渡すパラメータを修正 (修正済み)
   const data = await getDetail(params.slug, {
-    draftKey: props.searchParams?.dk,
+    draftKey: searchParams?.dk,
     depth: 1, 
   });
 
