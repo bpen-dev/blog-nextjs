@@ -1,0 +1,65 @@
+/* 全体のコンテナ */
+.container {
+  margin-bottom: 1.5rem; /* 下のマージン */
+  font-size: 0.8rem;     /* フォントサイズをコンパクトに */
+  line-height: 1.5;      /* 行の高さを調整して詰める */
+}
+
+/* パンくずリスト全体 */
+.list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;       /* 長い場合に折り返す */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 各項目（アイコン＋テキスト＋区切り文字） */
+.item {
+  display: flex;
+  align-items: center; /* アイコンと文字の垂直中央揃え */
+  color: #6c757d;      /* 基本の文字色を落ち着いたグレーに */
+}
+
+/* リンク部分 */
+.link {
+  color: #6c757d; /* リンクの文字色をグレーに */
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  text-decoration: underline;
+  color: #343a40; /* ホバー時は濃いグレーに */
+}
+
+/* 現在のページ（最後の項目）のスタイルを修正 */
+.current {
+  font-weight: 500;
+  flex-wrap: nowrap; 
+
+  /* 2行までに制限し、超える場合は省略記号(...)を表示する設定 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;  /* 表示する行数を2行に設定 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* アイコン */
+.icon {
+  margin-right: 0.3rem;
+  font-size: 0.9rem;
+  /* アイコンがテキストより少し下にずれるのを補正 */
+  position: relative;
+  top: 1px;
+}
+
+/* 区切り文字 */
+.separator {
+  margin: 0 0.4rem;
+  color: #adb5bd; /* 区切り文字の色をさらに薄く */
+}
+
+/* 2行表示を許容するため、以前のmax-width指定は不要になります */

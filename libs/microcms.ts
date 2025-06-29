@@ -21,6 +21,12 @@ export type Writer = {
 } & MicroCMSContentId &
   MicroCMSDate;
 
+// カテゴリの型定義
+export type Category = {
+  name: string;
+} & MicroCMSContentId &
+  MicroCMSDate;
+
 // ブログの型定義
 export type Blog = {
   title: string;
@@ -29,13 +35,8 @@ export type Blog = {
   thumbnail?: MicroCMSImage;
   tags?: Tag[];
   writer?: Writer;
+  category?: Category; // この行を追加
 };
-
-// カテゴリの型定義
-export type Category = {
-  name: string;
-} & MicroCMSContentId &
-  MicroCMSDate;
 
 export type Article = Blog & MicroCMSContentId & MicroCMSDate;
 
@@ -99,7 +100,6 @@ async function getAllContents<T extends { id: string }>(endpoint: string, querie
 // Layoutで安全に全記事を取得する関数
 export const getAllArticlesForLayout = async (queries?: Omit<MicroCMSQueries, 'limit' | 'offset'>) => {
   try {
-    // ↓↓↓ ここを <Article> に修正しました ↓↓↓
     const contents = await getAllContents<Article>('blog', queries);
     return { contents, totalCount: contents.length };
   } catch (error) {
