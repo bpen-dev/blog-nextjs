@@ -240,15 +240,15 @@
 @media (max-width: 640px) {
   .title {
     font-size: 1.2rem;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
-
+/* 
   .description {
     font-size: 0.9rem;
     color: var(--color-text-sub);
     margin: 24px 0 40px;
     text-align: center;
-  }
+  } */
 
   .meta {
     display: flex;
@@ -275,7 +275,7 @@
   .thumbnail {
     width: 100%;
     height: auto;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
   }
 
   .content {
@@ -286,4 +286,40 @@
     width: 100%;
     height: auto;
   }
+  @media (max-width: 640px) {
+  /* 見出しのフォントサイズを調整 */
+  .content > h1 {
+    font-size: 1.6rem; /* h1を少し小さく */
+    margin-top: 2rem; /* 上の余白も調整 */
+  }
+  .content > h2 {
+    font-size: 1.2rem; /* h2を少し小さく */
+    margin-top: 3em;
+  }
+  .content > h3 {
+    font-size: 1.1rem; /* h3を少し小さく */
+    margin-top: 2.5rem;
+  }
+  .content > h4 {
+    font-size: 1.1rem; /* h4を少し小さく */
+    margin-top: 2.5rem;
+  }
+  .content > h5 {
+    font-size: 1rem; /* h5は本文とほぼ同じに */
+    margin-top: 2.5rem;
+  }
+}
+  .content > p {
+    font-size: 1rem; /* 本文のフォントサイズを少し小さく */
+  }
+
+  .content pre > code {
+    font-size: 0.85rem; /* コードブロックのフォントサイズを少し小さく */
+    padding: 1em; /* 内側の余白を調整 */
+  }
+  .dateWrapper {
+  width: 100%;
+  font-size: 0.8rem;
+}
+
 }
