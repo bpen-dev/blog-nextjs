@@ -7,8 +7,10 @@
 }
 
 .title {
-  font-size: 1.5rem;
-  margin-bottom: 5px;
+  font-size: 1.8rem; /* フォントサイズを大きく */
+  /* margin-bottom: 1rem; 下マージンを調整 */
+  font-weight: 700;
+  line-height: 1.4; /* 行間を調整 */
 }
 
 /* .description {
@@ -61,40 +63,58 @@
   margin-top: 0;
 }
 
+/* h1: プランAのデザインをそのまま採用 */
 .content > h1 {
   font-size: 2rem;
-  font-weight: bold;
-  border-bottom: 1px solid var(--color-border);
-  margin: 2.8rem 0 1rem;
+  font-weight: 700;
+  margin: 3rem 0 2rem;
+  padding: 1rem 1.5rem;
+  color: #fff;
+  background-color: #555; /* やや濃いめのグレー */
+  border-radius: 3px;
 }
 
+/* h2: h1のテイストを引き継いだアクセント付き見出し */
 .content > h2 {
   font-size: 1.6rem;
   font-weight: bold;
-  margin: 2.8em 0 1rem;
+  margin: 3.5em 0 1.5rem;
+  padding: .7rem 1.2rem;
+  border-left: 6px solid  var(--color-border-dark);
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg-sub);
 }
 
+/* h3: シンプルながらも構造的な下線デザイン */
 .content > h3 {
   font-size: 1.4rem;
   font-weight: bold;
-  margin: 2.8rem 0 1rem;
+  margin: 2.8rem 0 1.5rem;
+  /* padding-bottom: .6rem; */
+  border-bottom: 4px solid var(--color-border-dark);
 }
 
+/* h4: テキストに溶け込む、さりげない縦線アクセント */
 .content > h4 {
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight: 700;
   margin: 2.8rem 0 1rem;
+  padding-left: 1rem;
+  border-left: 4px solid var(--color-border-dark);
 }
 
+/* h5: 本文より少し強調するだけのミニマルなデザイン */
 .content > h5 {
   font-size: 1.1rem;
   font-weight: bold;
   margin: 2.8rem 0 1rem;
+  color: var(--color-text-main);
 }
 
 .content > p {
-  margin: 2rem 0 0.5rem;
-  line-height: 2;
+  margin: 1.5rem 0; /* 上下のマージンを少し詰める */
+  line-height: 1.9; /* 行間を少し広げる */
+  font-size: 1.05rem; /* 文字サイズを少し大きくする */
 }
 
 .content > pre {
@@ -102,20 +122,43 @@
 }
 
 .content pre > code {
-  background-color: var(--color-bg-code);
   display: block;
   overflow-x: auto;
-  padding: 16px;
+  padding: 1.2em;
+  font-family: menlo, inconsolata, monospace;
+  font-size: 0.9rem;
+  background: #fefefe; /* テーマの背景色 */
+  border: 1px solid var(--color-border); /* 境界線を明確にする */
+  border-radius: var(--border-radius);
 }
 
+.content :not(pre) > code {
+  font-family: inherit; /* 親要素のフォント（Noto Sans JP）を継承 */
+  color: inherit; /* 親要素の文字色を継承 */
+  background: none; /* 背景色をなくす */
+  padding: 0; /* 内側の余白をなくす */
+  font-size: inherit; /* 親要素の文字サイズを継承 */
+  border-radius: 0; /* 角の丸みをなくす */
+  border: none; /* 境界線をなくす */
+}
+
+.dateWrapper {
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+/* ファイル名表示部分のスタイル */
 .content div[data-filename]::before {
   display: inline-block;
-  background-color: var(--color-bg-sub);
+  background-color: #f3f3f3; /* ファイル名部分の背景 */
+  color: #555; /* 文字色 */
   content: attr(data-filename);
   margin: 1em 0 0;
   font-family: menlo, inconsolata, monospace;
   font-size: 0.8rem;
   padding: 4px 16px;
+  border: 1px solid var(--color-border);
+  border-bottom: none; /* 下のボーダーは消す */
   border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 

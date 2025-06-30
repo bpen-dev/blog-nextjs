@@ -15,6 +15,9 @@ export default function Article({ data }: Props) {
     <main className={styles.main}>
       <h1 className={styles.title}>{data.title}</h1>
       <TagList tags={data.tags} />
+      <div className={styles.dateWrapper}>
+        <PublishedDate date={data.publishedAt || data.createdAt} />
+      </div>
       {/* <p className={styles.description}>{data.description}</p> */}
       <div className={styles.meta}>
         {data.writer && (
@@ -57,7 +60,6 @@ export default function Article({ data }: Props) {
           height={data.thumbnail?.height}
         />
       </picture>
-      <PublishedDate date={data.publishedAt || data.createdAt} />
       <div
         className={styles.content}
         dangerouslySetInnerHTML={{

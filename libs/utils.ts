@@ -1,7 +1,8 @@
 import { formatInTimeZone } from 'date-fns-tz';
 import { load } from 'cheerio';
 import hljs from 'highlight.js';
-import 'highlight.js/styles/hybrid.css';
+// 読み込むCSSを 'a11y-light.css' に変更
+import 'highlight.js/styles/a11y-light.css';
 
 export const formatDate = (date: string) => {
   return formatInTimeZone(new Date(date), 'Asia/Tokyo', 'd MMMM, yyyy');
