@@ -1,16 +1,19 @@
-import { formatRichText } from '@/libs/utils';
 import { type Article } from '@/libs/microcms';
+import { type TocItem } from '@/libs/utils'; // 修正: TocItemをインポート
 import PublishedDate from '../Date';
 import styles from './index.module.css';
 import TagList from '../TagList';
 import Profile from '../Profile';
 import Link from 'next/link';
+import TableOfContents from '../TableOfContents'; // 修正: 目次コンポーネントをインポート
 
 type Props = {
   data: Article;
+  body: string; // 修正: 本文のHTML
+  toc: TocItem[]; // 修正: 目次データ
 };
 
-export default function Article({ data }: Props) {
+export default function Article({ data, body, toc }: Props) {
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>{data.title}</h1>
@@ -40,7 +43,6 @@ export default function Article({ data }: Props) {
             </div>
           </Link>
         )}
-        
       </div>
       <picture>
         <source
@@ -60,10 +62,14 @@ export default function Article({ data }: Props) {
           height={data.thumbnail?.height}
         />
       </picture>
+
+      {/* 修正: アイキャッチ画像の下に目次を挿入 */}
+      <TableOfContents toc={toc} />
+
       <div
         className={styles.content}
         dangerouslySetInnerHTML={{
-          __html: `${formatRichText(data.content)}`,
+          __html: body, // 修正: IDが付与された本文HTMLを使用
         }}
       />
       <Profile writer={data.writer} />
