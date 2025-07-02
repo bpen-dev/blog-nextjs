@@ -1,0 +1,4 @@
+.copied {
+    background-color: #28a745 !important; /* 成功を示す緑色 */
+    color: white !important;
+}

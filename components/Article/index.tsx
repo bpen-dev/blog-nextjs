@@ -7,6 +7,7 @@ import Profile from '../Profile';
 import Link from 'next/link';
 import TableOfContents from '../TableOfContents';
 import ShareButtons from '../ShareButtons'; // ShareButtonsをインポート
+import CodeCopy from '../CodeCopy';
 
 type Props = {
   data: Article;
@@ -18,6 +19,7 @@ type Props = {
 export default function Article({ data, body, toc, articleUrl }: Props) {
   return (
     <main className={styles.main}>
+      <CodeCopy />
       <h1 className={styles.title}>{data.title}</h1>
       <TagList tags={data.tags} />
       <div className={styles.dateWrapper}>

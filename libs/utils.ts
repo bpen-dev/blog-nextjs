@@ -1,10 +1,10 @@
 import { formatInTimeZone } from 'date-fns-tz';
 import { load } from 'cheerio';
 import hljs from 'highlight.js';
-// 読み込むCSSを 'a11y-light.css' に変更
 import 'highlight.js/styles/a11y-light.css';
 
 export const formatDate = (date: string) => {
+  // "platedYYYY" を "yyyy" に修正
   return formatInTimeZone(new Date(date), 'Asia/Tokyo', 'd MMMM, yyyy');
 };
 
@@ -61,6 +61,18 @@ export const processRichText = (richText: string): { body: string; toc: TocItem[
     const res = highlight($(elm).text(), lang);
     $(elm).html(res.value);
   });
+
+  // 各<pre>タグにラッパーとコピーボタンを追加
+  $('pre').each((_, pre) => {
+    const $pre = $(pre);
+    // 既にラッパーで囲まれていない場合のみ処理
+    if (!$pre.parent().hasClass('code-block-wrapper')) {
+      $pre.wrap('<div class="code-block-wrapper"></div>');
+      const wrapper = $pre.parent();
+      wrapper.prepend('<button class="copy-code-button">コピー</button>');
+    }
+  });
+
 
   return {
     body: $.html(),
