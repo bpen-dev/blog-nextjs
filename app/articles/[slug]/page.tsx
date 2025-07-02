@@ -2,21 +2,18 @@ import { Metadata } from 'next';
 import { getDetail } from '@/libs/microcms';
 import Article from '@/components/Article';
 import Breadcrumbs from '@/components/Breadcrumbs';
-import { processRichText } from '@/libs/utils'; // 修正: 新しいユーティリティ関数をインポート
+import { processRichText } from '@/libs/utils';
 
 type Props = {
   params: Promise<{
-    // paramsの型をPromise<T>に修正
     slug: string;
   }>;
   searchParams: Promise<{
-    // searchParamsの型をPromise<T>に修正
-    dk?: string; // draftKey（dk）をオプションとして定義
-    [key: string]: string | string[] | undefined; // 他の任意の文字列キー（stringまたはstring[]の値、あるいはundefined）も許容
+    dk?: string;
+    [key: string]: string | string[] | undefined;
   }>;
 };
 
-// パンくずリストの各項目の型
 type Crumb = {
   name: string;
   href: string;
@@ -24,8 +21,8 @@ type Crumb = {
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = await props.params; // props.paramsをawaitで解決
-  const searchParams = await props.searchParams; // props.searchParamsをawaitで解決
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const data = await getDetail(params.slug, {
     draftKey: searchParams?.dk,
   });
@@ -39,27 +36,23 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       images: [data?.thumbnail?.url || ''],
     },
     alternates: {
-      canonical: `/articles/${params.slug}`, // await済みのparamsを使用
+      canonical: `/articles/${params.slug}`,
     },
   };
 }
 
 export default async function Page(props: Props) {
-  const params = await props.params; // props.paramsをawaitで解決
-  const searchParams = await props.searchParams; // props.searchParamsをawaitで解決
-  // 修正点：getDetailに渡すパラメータを修正 (修正済み)
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const data = await getDetail(params.slug, {
     draftKey: searchParams?.dk,
     depth: 1,
   });
 
-  // ここで本文処理と目次生成を行う
   const { body, toc } = processRichText(data.content);
 
-  // パンくずリスト用のデータを構築
   const crumbs: Crumb[] = [{ name: 'ホーム', href: '/' }];
 
-  // 記事にカテゴリが設定されている場合、カテゴリをパンくずリストに追加
   if (data.category) {
     crumbs.push({
       name: data.category.name,
@@ -68,17 +61,19 @@ export default async function Page(props: Props) {
     });
   }
 
-  // 現在の記事タイトルを最後の項目として追加
   crumbs.push({
     name: data.title,
     href: `/articles/${data.id}`,
   });
 
+  // 記事の完全なURLを構築
+  const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
+  const articleUrl = `${baseUrl}/articles/${data.id}`;
+
   return (
     <>
       <Breadcrumbs crumbs={crumbs} />
-      {/* Articleコンポーネントに body と toc を渡すように修正 */}
-      <Article data={data} body={body} toc={toc} />
+      <Article data={data} body={body} toc={toc} articleUrl={articleUrl} />
     </>
   );
 }

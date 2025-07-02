@@ -1,19 +1,21 @@
 import { type Article } from '@/libs/microcms';
-import { type TocItem } from '@/libs/utils'; // 修正: TocItemをインポート
+import { type TocItem } from '@/libs/utils';
 import PublishedDate from '../Date';
 import styles from './index.module.css';
 import TagList from '../TagList';
 import Profile from '../Profile';
 import Link from 'next/link';
-import TableOfContents from '../TableOfContents'; // 修正: 目次コンポーネントをインポート
+import TableOfContents from '../TableOfContents';
+import ShareButtons from '../ShareButtons'; // ShareButtonsをインポート
 
 type Props = {
   data: Article;
-  body: string; // 修正: 本文のHTML
-  toc: TocItem[]; // 修正: 目次データ
+  body: string;
+  toc: TocItem[];
+  articleUrl: string; // articleUrlをpropsとして受け取る
 };
 
-export default function Article({ data, body, toc }: Props) {
+export default function Article({ data, body, toc, articleUrl }: Props) {
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>{data.title}</h1>
@@ -21,7 +23,6 @@ export default function Article({ data, body, toc }: Props) {
       <div className={styles.dateWrapper}>
         <PublishedDate date={data.publishedAt || data.createdAt} />
       </div>
-      {/* <p className={styles.description}>{data.description}</p> */}
       <div className={styles.meta}>
         {data.writer && (
           <Link href={`/writer/${data.writer.id}`} className={styles.writerLink}>
@@ -63,15 +64,18 @@ export default function Article({ data, body, toc }: Props) {
         />
       </picture>
 
-      {/* 修正: アイキャッチ画像の下に目次を挿入 */}
       <TableOfContents toc={toc} />
 
       <div
         className={styles.content}
         dangerouslySetInnerHTML={{
-          __html: body, // 修正: IDが付与された本文HTMLを使用
+          __html: body,
         }}
       />
+
+      {/* 記事の最後にシェアボタンを追加 */}
+      <ShareButtons url={articleUrl} title={data.title} />
+
       <Profile writer={data.writer} />
     </main>
   );

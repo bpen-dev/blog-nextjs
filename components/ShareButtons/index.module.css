@@ -1,0 +1,45 @@
+.container {
+  margin: 2rem 0;
+  padding: 1rem 0;
+  text-align: center;
+  position: relative; /* 相対配置の基準にする */
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.copyButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f0f2f5;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.copyButton:hover {
+  background-color: #e2e8f0;
+}
+
+.copyMessage {
+  position: absolute; /* 絶対配置にする */
+  bottom: -1.5rem; /* いい感じの位置に調整 */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.9rem;
+  color: #0070f3;
+}
