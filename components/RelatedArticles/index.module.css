@@ -1,0 +1,10 @@
+.container {
+  margin: 3rem 0;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}

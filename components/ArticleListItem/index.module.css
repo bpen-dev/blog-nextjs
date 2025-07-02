@@ -16,12 +16,12 @@
 .link {
   display: flex;
   gap: 0;
-  align-items: center; /* 追加: 画像とコンテンツを上下中央に配置 */
+  align-items: center; /* 垂直中央揃えを維持 */
 }
 
 .image {
   width: 280px;
-  height: 147px; /* 1200x630 (実質240x126) のアスペクト比を維持するための高さに調整 */
+  height: 147px;
   object-fit: cover;
   margin: .5rem;
 }
@@ -30,7 +30,7 @@
   padding: 0.75rem;
   display: flex;
   flex-direction: column;
-  flex: 1; /* 伸びるように指定 */
+  flex: 1;
 }
 
 .title {

@@ -1,4 +1,4 @@
-import { type Article as ArticleType } from '@/libs/microcms';
+import { type Article as ArticleType, type Article as MicroCMSArticle } from '@/libs/microcms';
 import { type TocItem } from '@/libs/utils';
 import ArticleDate from '../Date';
 import styles from './index.module.css';
@@ -8,15 +8,17 @@ import Link from 'next/link';
 import TableOfContents from '../TableOfContents';
 import ShareButtons from '../ShareButtons';
 import CodeCopy from '../CodeCopy';
+import RelatedArticles from '../RelatedArticles';
 
 type Props = {
   data: ArticleType;
   body: string;
   toc: TocItem[];
   articleUrl: string;
+  relatedArticles: MicroCMSArticle[];
 };
 
-export default function Article({ data, body, toc, articleUrl }: Props) {
+export default function Article({ data, body, toc, articleUrl, relatedArticles }: Props) {
   return (
     <main className={styles.main}>
       <CodeCopy />
@@ -78,6 +80,9 @@ export default function Article({ data, body, toc, articleUrl }: Props) {
         }}
       />
       <ShareButtons url={articleUrl} title={data.title} />
+
+      <RelatedArticles articles={relatedArticles} />
+
       <Profile writer={data.writer} />
     </main>
   );

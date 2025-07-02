@@ -3,9 +3,10 @@ import ArticleListItem from '../ArticleListItem';
 
 type Props = {
   articles?: Article[];
+  showDate?: boolean;
 };
 
-export default function ArticleList({ articles }: Props) {
+export default function ArticleList({ articles, showDate = true }: Props) {
   if (!articles) {
     return null;
   }
@@ -15,7 +16,7 @@ export default function ArticleList({ articles }: Props) {
   return (
     <ul>
       {articles.map((article) => (
-        <ArticleListItem key={article.id} article={article} />
+        <ArticleListItem key={article.id} article={article} showDate={showDate} />
       ))}
     </ul>
   );

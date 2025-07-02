@@ -7,9 +7,10 @@ import ArticleDate from '../Date';
 
 type Props = {
   article: Article;
+  showDate?: boolean;
 };
 
-export default function ArticleListItem({ article }: Props) {
+export default function ArticleListItem({ article, showDate = true }: Props) {
   return (
     <li className={styles.list}>
       <Link href={`/articles/${article.id}`} className={styles.link}>
@@ -46,12 +47,14 @@ export default function ArticleListItem({ article }: Props) {
           <dd>
             <TagList tags={article.tags} hasLink={false} />
           </dd>
-          <dd className={styles.date}>
-            <ArticleDate
-              publishedAt={article.publishedAt || article.createdAt}
-              updatedAt={article.updatedAt}
-            />
-          </dd>
+          {showDate && (
+            <dd className={styles.date}>
+              <ArticleDate
+                publishedAt={article.publishedAt || article.createdAt}
+                updatedAt={article.updatedAt}
+              />
+            </dd>
+          )}
         </dl>
       </Link>
     </li>

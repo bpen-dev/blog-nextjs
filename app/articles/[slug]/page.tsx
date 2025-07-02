@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { getDetail } from '@/libs/microcms';
+import { getDetail, getList } from '@/libs/microcms';
 import Article from '@/components/Article';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import { processRichText } from '@/libs/utils';
@@ -49,6 +49,15 @@ export default async function Page(props: Props) {
     depth: 1,
   });
 
+  const relatedArticles =
+    data.category
+      ? await getList({
+          limit: 3,
+          filters: `category[equals]${data.category.id}[and]id[not_equals]${data.id}`,
+          fields: 'title,id,thumbnail,publishedAt,updatedAt,tags',
+        })
+      : { contents: [] };
+
   const { body, toc } = processRichText(data.content);
 
   const crumbs: Crumb[] = [{ name: 'ホーム', href: '/' }];
@@ -66,14 +75,19 @@ export default async function Page(props: Props) {
     href: `/articles/${data.id}`,
   });
 
-  // 記事の完全なURLを構築
   const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
   const articleUrl = `${baseUrl}/articles/${data.id}`;
 
   return (
     <>
       <Breadcrumbs crumbs={crumbs} />
-      <Article data={data} body={body} toc={toc} articleUrl={articleUrl} />
+      <Article
+        data={data}
+        body={body}
+        toc={toc}
+        articleUrl={articleUrl}
+        relatedArticles={relatedArticles.contents}
+      />
     </>
   );
 }
