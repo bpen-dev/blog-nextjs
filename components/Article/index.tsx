@@ -1,19 +1,19 @@
-import { type Article } from '@/libs/microcms';
+import { type Article as ArticleType } from '@/libs/microcms';
 import { type TocItem } from '@/libs/utils';
-import PublishedDate from '../Date';
+import ArticleDate from '../Date';
 import styles from './index.module.css';
 import TagList from '../TagList';
 import Profile from '../Profile';
 import Link from 'next/link';
 import TableOfContents from '../TableOfContents';
-import ShareButtons from '../ShareButtons'; // ShareButtonsをインポート
+import ShareButtons from '../ShareButtons';
 import CodeCopy from '../CodeCopy';
 
 type Props = {
-  data: Article;
+  data: ArticleType;
   body: string;
   toc: TocItem[];
-  articleUrl: string; // articleUrlをpropsとして受け取る
+  articleUrl: string;
 };
 
 export default function Article({ data, body, toc, articleUrl }: Props) {
@@ -23,7 +23,10 @@ export default function Article({ data, body, toc, articleUrl }: Props) {
       <h1 className={styles.title}>{data.title}</h1>
       <TagList tags={data.tags} />
       <div className={styles.dateWrapper}>
-        <PublishedDate date={data.publishedAt || data.createdAt} />
+        <ArticleDate
+          publishedAt={data.publishedAt || data.createdAt}
+          updatedAt={data.updatedAt}
+        />
       </div>
       <div className={styles.meta}>
         {data.writer && (
@@ -74,10 +77,7 @@ export default function Article({ data, body, toc, articleUrl }: Props) {
           __html: body,
         }}
       />
-
-      {/* 記事の最後にシェアボタンを追加 */}
       <ShareButtons url={articleUrl} title={data.title} />
-
       <Profile writer={data.writer} />
     </main>
   );

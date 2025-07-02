@@ -1,7 +1,15 @@
-.date {
+.container {
   display: flex;
   align-items: center;
-  line-height: 16px;
-  gap: 8px;
-  margin: 0.8rem 0;
+  gap: 1rem;
+  margin: 0.3rem 0;
+  flex-wrap: wrap;
+}
+
+.dateItem {
+  display: flex;
+  align-items: center; /* アイコンとテキストを垂直方向中央に揃えます */
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--color-text-sub);
 }
