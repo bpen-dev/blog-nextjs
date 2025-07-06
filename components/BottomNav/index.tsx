@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, Suspense } from 'react'; // ← Suspense をインポート
+import { useState, useEffect, useRef, Suspense } from 'react'; // Suspenseをインポート
 import { FiSearch, FiArrowUp, FiMenu, FiX } from 'react-icons/fi';
 import { useSidebar } from '@/context/SidebarContext';
 import SearchField from '@/components/SearchField';
@@ -32,7 +32,7 @@ export default function BottomNav() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  
+
   useEffect(() => {
     if (isModalOpen) {
       document.body.classList.add('modal-open');
@@ -72,8 +72,8 @@ export default function BottomNav() {
               <FiX />
             </button>
             <h3 className={styles.modalTitle}>ブログ内を検索</h3>
-            {/* ↓↓↓ ここを修正しました ↓↓↓ */}
-            <Suspense>
+            {/* ↓↓↓ ここを修正しました（fallbackを追加）↓↓↓ */}
+            <Suspense fallback={<div>Loading...</div>}>
               <SearchField />
             </Suspense>
             {/* ↑↑↑ ここまで修正 ↑↑↑ */}
