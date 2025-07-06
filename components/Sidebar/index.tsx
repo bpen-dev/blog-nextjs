@@ -95,6 +95,7 @@ const Sidebar: React.FC<Props> = ({ categories, popularTags }) => {
           <div className={styles.qualifications}>
             <span className={styles.qualificationItem}>ITパスポート</span>
             <span className={styles.qualificationItem}>基本情報</span>
+            <span className={styles.qualificationItem}>応用情報</span>
             <span className={styles.qualificationItem}>TOEIC 795</span>
           </div>
         </div>
