@@ -9,7 +9,8 @@ import SidebarWrapper from '@/components/Sidebar/SidebarWrapper';
 import './globals.css';
 import styles from './layout.module.css';
 import { PopularTag } from '@/libs/microcms';
-import GoogleAnalytics from '@/components/GoogleAnalytics'; 
+import GoogleAnalytics from '@/components/GoogleAnalytics';
+import { Suspense } from 'react'; // ← Suspense をインポート
 
 export const metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
@@ -59,7 +60,10 @@ export default async function RootLayout({ children }: Props) {
   return (
     <html lang="ja">
       <body>
-        <GoogleAnalytics />
+        {/* ↓↓↓ GAコンポーネントをSuspenseで囲みます ↓↓↓ */}
+        <Suspense>
+          <GoogleAnalytics />
+        </Suspense>
         <SidebarProvider>
           <Header />
           <div className={styles.container}>
