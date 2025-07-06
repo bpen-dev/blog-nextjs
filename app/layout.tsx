@@ -9,6 +9,7 @@ import SidebarWrapper from '@/components/Sidebar/SidebarWrapper';
 import './globals.css';
 import styles from './layout.module.css';
 import { PopularTag } from '@/libs/microcms';
+import GoogleAnalytics from '@/components/GoogleAnalytics'; 
 
 export const metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
@@ -58,6 +59,7 @@ export default async function RootLayout({ children }: Props) {
   return (
     <html lang="ja">
       <body>
+        <GoogleAnalytics />
         <SidebarProvider>
           <Header />
           <div className={styles.container}>
