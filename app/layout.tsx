@@ -11,6 +11,7 @@ import styles from './layout.module.css';
 import { PopularTag } from '@/libs/microcms';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import { Suspense } from 'react'; // ← Suspense をインポート
+import Script from 'next/script'; // ← Script をインポート
 
 export const metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
@@ -59,6 +60,15 @@ export default async function RootLayout({ children }: Props) {
 
   return (
     <html lang="ja">
+      <head>
+        {/* Google AdSense Script */}
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
       <body>
         {/* ↓↓↓ GAコンポーネントをSuspenseで囲みます ↓↓↓ */}
         <Suspense>
